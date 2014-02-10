@@ -1,0 +1,94 @@
+#wsalayer {
+	position: fixed;
+	top: 0%;
+	width:100%;
+	background-color: white;
+}
+
+.headerlogo{
+	margin: 0;
+	width: 100%;
+	padding: 5px 0;
+	text-align: center;
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));
+	background-image: -moz-gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));
+	background-image: gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));
+	color: white;
+	font-style: italic;
+	font-weight: bold;
+	text-shadow: 1px 1px 5px #fff;
+	box-shadow: 0 2px 7px #A6A7E4;
+}
+#container {
+	margin: 10px;
+}
+div#errMsg{
+	display: none;
+	margin: 5px;
+	padding: 5px 10px;
+	width: auto;
+	border-radius: 6px;
+	font-size: 90%;
+	background-color: #FEA;
+}
+#dbnamediv{
+	display: block;
+	font-size: 80%;
+}
+h3{
+	margin: 0;
+}
+h3 > span{
+	font-size: 70%;
+	display: inline-block;
+	padding: 5px;
+}
+table.data{
+	width:100%;
+	border-collapse: collapse;
+	font-size: 90%;
+}
+table.data th{
+	background-color: #def;
+	border: 1px solid #ccc;
+}
+table.data td{
+	max-width: 400px;
+	border: 1px solid #ccc;
+	vertical-align: top;
+	font-size: 11px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+ul.jsondata{
+	margin: 2px auto;
+	padding-left: 2em;
+	list-style-type: none;
+}
+.jsondata span, .jsonspan{
+	font-size: 11px;
+	font-family: Menlo, monospace;
+}
+.jsondata span.label{
+	color: #881391;
+}
+.jsondata span.string{
+	color: #C41A16;
+	white-space: pre;
+}
+.jsondata span.number{
+	color: #1C00CF;
+}
+p.sqlarea{
+	margin: 5px;
+	padding: 5px 10px;
+	width: auto;
+	border-radius: 6px;
+	font-size: 90%;
+	background-color: #FEA;
+}
+textarea#sql{
+	width: 90%;
+	max-width: 400px;
+	height: 100px;
+}

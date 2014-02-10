@@ -1,0 +1,35 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8">
+	<title>WebSQLAdmin</title>
+	<style link="./WebSQLAdmin.css"></style>
+    <link href="./WebSQLAdmin.css" media="all" rel="stylesheet" type="text/css" />
+      <script src="WebSQLAdmin.js" type="text/javascript"></script>
+</head>
+<style>
+body {
+	margin: 0;
+}
+</style>
+<body>
+<header class="headerlogo">WebSQLAdmin</header>
+<div id="container">
+	<div id="errMsg"></div>
+	<div id="dbnamediv">
+		<input id='dbname'><button onclick="wsa.setDBName();">set</button><br>
+		<input type="checkbox" id="escape" checked><label for="htmlescape">escapeHTML</label>
+		<input type="checkbox" id="parsejson" checked><label for="parsejson">parseJSON</label>
+	</div>
+
+	<div id="funcitons">
+		<button onclick="if(confirm('do u wanna drop all tables?')) wsa.dropAll();">drop all</button>
+	</div>
+	<div id="localStorage"></div>
+	<div id="tables"></div>
+
+	<textarea id='sql'></textarea><button onclick="wsa.execFreeSQL();">exec</button>
+	<div id="sqltarget"></div>
+</div>
+</body>
+<html>
