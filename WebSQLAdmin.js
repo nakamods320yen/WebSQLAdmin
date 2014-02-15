@@ -88,6 +88,8 @@ wsa.showLocalStorage = function(){
 		+ '<div id="localStorages"></div>';
 };
 wsa.showTables = function(){
+	g('tables').innerHTML = '';
+
 	var db = wsa.db;
 	var sql = "SELECT name, sql FROM sqlite_master WHERE type='table' ;";
 	wsa.execSQL(sql, [], function(tx, rs){
@@ -162,10 +164,12 @@ wsa.check = function(){
 	}
 };
 wsa.setDBName = function(){
-	var dbanme = g('dbname').value;
+	var dbname = g('dbname').value;
 	if(!dbname) return;
 	wsa.dbname = dbname;
-	wsa.itit();
+	//wsa.itit();
+	wsa.db = window.openDatabase(wsa.dbname, '', '', 1024*1024);
+	wsa.showTables();
 };
 //you must set wsa.beforeTime before use showSQLData()
 wsa.showSQLData = function(sqltarget, sql){
