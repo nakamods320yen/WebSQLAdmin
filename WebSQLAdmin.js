@@ -11,58 +11,61 @@ var wsa = {};
 wsa.dbname = 'nakamods320yen@gmail.com';
 wsa.init = function(){
 	//init HTML
-	wsa.initHTML(function(){
-		if(!wsa.check){
-			//show err mes
-		}
-		if(!wsa.dbname){
-			g('dbnamediv').style.display = 'block';
-			return;
-		}
-		g('dbname').value = wsa.dbname;
-		var db = window.openDatabase(wsa.dbname, '', '', 1024*1024);
-		wsa.db = db;
+	wsa.initHTML();
 
-		wsa.db.compatibleReadTransaction = (typeof db.readTransaction=='function')
-			? db.readTransaction
-			: db.transaction;
+	if(!wsa.check){
+		//show err mes
+	}
+	if(!wsa.dbname){
+		g('dbnamediv').style.display = 'block';
+		return;
+	}
+	g('dbname').value = wsa.dbname;
+	var db = window.openDatabase(wsa.dbname, '', '', 1024*1024);
+	wsa.db = db;
 
-		//show localStrage
-		wsa.showLocalStorage();
+	wsa.db.compatibleReadTransaction = (typeof db.readTransaction=='function')
+		? db.readTransaction
+		: db.transaction;
 
-		wsa.showTables();
-	});
+	//show localStrage
+	wsa.showLocalStorage();
+
+	wsa.showTables();
 
 };
-wsa.initHTML = function(success){
-	var link=document.createElement('link');
+wsa.initHTML = function(){
+
+	var css_text = '#wsalayer {  position: fixed;  top: 0%;  width:100%;  background-color: white; }  .headerlogo{  margin: 0;  width: 100%;  padding: 5px 0;  text-align: center;  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));  background-image: -moz-gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));  background-image: gradient(linear,left top,left bottom,color-stop(0,#0000A7),color-stop(1,#000046));  color: white;  font-style: italic;  font-weight: bold;  text-shadow: 1px 1px 5px #fff;  box-shadow: 0 2px 7px #A6A7E4; } #container {  margin: 10px; } div#errMsg{  display: none;  margin: 5px;  padding: 5px 10px;  width: auto;  border-radius: 6px;  font-size: 90%;  background-color: #FEA; } #dbnamediv{  display: block;  font-size: 80%; } h3{  margin: 0; } h3 > span{  font-size: 70%;  display: inline-block;  padding: 5px; } table.data{  width:100%;  border-collapse: collapse;  font-size: 90%; } table.data th{  background-color: #def;  border: 1px solid #ccc; } table.data td{  max-width: 400px;  border: 1px solid #ccc;  vertical-align: top;  font-size: 11px;  text-overflow: ellipsis;  overflow: hidden; } ul.jsondata{  margin: 2px auto;  padding-left: 2em;  list-style-type: none; } .jsondata span, .jsonspan{  font-size: 11px;  font-family: Menlo, monospace; } .jsondata span.label{  color: #881391; } .jsondata span.string{  color: #C41A16;  white-space: pre; } .jsondata span.number{  color: #1C00CF; } p.sqlarea{  margin: 5px;  padding: 5px 10px;  width: auto;  border-radius: 6px;  font-size: 90%;  background-color: #FEA; } textarea#sql{  width: 90%;  max-width: 400px;  height: 100px; }';
+	var style = document.createElement('style');
+	style.innerText = css_text;
+	document.getElementsByTagName('head')[0].appendChild(style);
+
+	/*var link=document.createElement('link');
 	link.href='https://raw.github.com/nakamods320yen/WebSQLAdmin/master/WebSQLAdmin.css';
 	link.rel='stylesheet';link.type='text/css';
 	link.media='all';
-	link.onload = function(){
-		var str = '<div id="wsalayer">'
-			+ '<header class="headerlogo">WebSQLAdmin</header>'
-			+ '<div id="container">'
-			+ '<div id="errMsg"></div>'
-			+ '<div id="dbnamediv">'
-				+ '<input id="dbname"><button onclick="wsa.setDBName();">set</button><br>'
-				+ '<input type="checkbox" id="escape" checked><label for="htmlescape">escapeHTML</label>'
-				+ '<input type="checkbox" id="parsejson" checked><label for="parsejson">parseJSON</label>'
-			+ '</div>'
-			+ '<div id="funcitons">'
-				+ '<button onclick="if(confirm(\'do u wanna drop all tables?\')) wsa.dropAll();">drop all</button>'
-			+ '</div>'
-			+ '<div id="localStorage"></div>'
-			+ '<div id="tables"></div>'
-			+ '<textarea id="sql"></textarea><button onclick="wsa.execFreeSQL();">exec</button>'
-			+ '<div id="sqltarget"></div>'
-			+ '</div>' //#container
-			+ '</div>'; //#wsalayer
-		document.querySelector('body').innerHTML = str;
-		
-		if(typeof success == 'function') success();
-	};
-	document.head.appendChild(link);
+	link.onload = function(){if(typeof success == 'function') success();};
+	document.getElementsByTagName('head')[0].appendChild(link);*/
+	var str = '<div id="wsalayer">'
+		+ '<header class="headerlogo">WebSQLAdmin</header>'
+		+ '<div id="container">'
+		+ '<div id="errMsg"></div>'
+		+ '<div id="dbnamediv">'
+			+ '<input id="dbname"><button onclick="wsa.setDBName();">set</button><br>'
+			+ '<input type="checkbox" id="escape" checked><label for="htmlescape">escapeHTML</label>'
+			+ '<input type="checkbox" id="parsejson" checked><label for="parsejson">parseJSON</label>'
+		+ '</div>'
+		+ '<div id="funcitons">'
+			+ '<button onclick="if(confirm(\'do u wanna drop all tables?\')) wsa.dropAll();">drop all</button>'
+		+ '</div>'
+		+ '<div id="localStorage"></div>'
+		+ '<div id="tables"></div>'
+		+ '<textarea id="sql"></textarea><button onclick="wsa.execFreeSQL();">exec</button>'
+		+ '<div id="sqltarget"></div>'
+		+ '</div>' //#container
+		+ '</div>'; //#wsalayer
+	document.querySelector('body').innerHTML = str;
 
 };
 wsa.showLocalStorage = function(){
