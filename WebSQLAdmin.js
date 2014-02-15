@@ -11,7 +11,7 @@ var wsa = {};
 wsa.dbname = 'nakamods320yen@gmail.com';
 wsa.init = function(){
 	//init HTML
-	wsa.initHTML();
+	wsa.initHTML(function(){console.log('success');});
 
 	if(!wsa.check){
 		//show err mes
@@ -33,35 +33,35 @@ wsa.init = function(){
 
 	wsa.showTables();
 };
-wsa.initHTML = function(){
+wsa.initHTML = function(success){
 	var link=document.createElement('link');
 	link.href='https://raw.github.com/nakamods320yen/WebSQLAdmin/master/WebSQLAdmin.css';
 	link.rel='stylesheet';link.type='text/css';
 	link.media='all';
 	link.onload = function(){
-		console.log('css loaded^^');
+		if(typeof success == 'function') success();
+		var str = '<div id="wsalayer">'
+			+ '<header class="headerlogo">WebSQLAdmin</header>'
+			+ '<div id="container">'
+			+ '<div id="errMsg"></div>'
+			+ '<div id="dbnamediv">'
+				+ '<input id="dbname"><button onclick="wsa.setDBName();">set</button><br>'
+				+ '<input type="checkbox" id="escape" checked><label for="htmlescape">escapeHTML</label>'
+				+ '<input type="checkbox" id="parsejson" checked><label for="parsejson">parseJSON</label>'
+			+ '</div>'
+			+ '<div id="funcitons">'
+				+ '<button onclick="if(confirm(\'do u wanna drop all tables?\')) wsa.dropAll();">drop all</button>'
+			+ '</div>'
+			+ '<div id="localStorage"></div>'
+			+ '<div id="tables"></div>'
+			+ '<textarea id="sql"></textarea><button onclick="wsa.execFreeSQL();">exec</button>'
+			+ '<div id="sqltarget"></div>'
+			+ '</div>' //#container
+			+ '</div>'; //#wsalayer
+		document.querySelector('body').innerHTML = str;
 	};
 	document.head.appendChild(link);
 
-	var str = '<div id="wsalayer">'
-		+ '<header class="headerlogo">WebSQLAdmin</header>'
-		+ '<div id="container">'
-		+ '<div id="errMsg"></div>'
-		+ '<div id="dbnamediv">'
-			+ '<input id="dbname"><button onclick="wsa.setDBName();">set</button><br>'
-			+ '<input type="checkbox" id="escape" checked><label for="htmlescape">escapeHTML</label>'
-			+ '<input type="checkbox" id="parsejson" checked><label for="parsejson">parseJSON</label>'
-		+ '</div>'
-		+ '<div id="funcitons">'
-			+ '<button onclick="if(confirm(\'do u wanna drop all tables?\')) wsa.dropAll();">drop all</button>'
-		+ '</div>'
-		+ '<div id="localStorage"></div>'
-		+ '<div id="tables"></div>'
-		+ '<textarea id="sql"></textarea><button onclick="wsa.execFreeSQL();">exec</button>'
-		+ '<div id="sqltarget"></div>'
-		+ '</div>' //#container
-		+ '</div>'; //#wsalayer
-	document.querySelector('body').innerHTML = str;
 };
 wsa.showLocalStorage = function(){
 	g('localStorage').innerHTML = '<h3>localStorage<span onclick="wsa.showLSRecords(this)">show</span></h3>'
