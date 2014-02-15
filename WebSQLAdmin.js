@@ -40,7 +40,6 @@ wsa.initHTML = function(success){
 	link.rel='stylesheet';link.type='text/css';
 	link.media='all';
 	link.onload = function(){
-		if(typeof success == 'function') success();
 		var str = '<div id="wsalayer">'
 			+ '<header class="headerlogo">WebSQLAdmin</header>'
 			+ '<div id="container">'
@@ -60,6 +59,8 @@ wsa.initHTML = function(success){
 			+ '</div>' //#container
 			+ '</div>'; //#wsalayer
 		document.querySelector('body').innerHTML = str;
+		
+		if(typeof success == 'function') success();
 	};
 	document.head.appendChild(link);
 
