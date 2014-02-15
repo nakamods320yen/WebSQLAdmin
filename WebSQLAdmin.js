@@ -38,8 +38,11 @@ wsa.initHTML = function(){
 	link.href='https://raw.github.com/nakamods320yen/WebSQLAdmin/master/WebSQLAdmin.css';
 	link.rel='stylesheet';link.type='text/css';
 	link.media='all';
+	link.onload = function(){
+		console.log('css loaded^^');
+	};
 	document.head.appendChild(link);
-	
+
 	var str = '<div id="wsalayer">'
 		+ '<header class="headerlogo">WebSQLAdmin</header>'
 		+ '<div id="container">'
