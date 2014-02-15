@@ -11,27 +11,28 @@ var wsa = {};
 wsa.dbname = 'nakamods320yen@gmail.com';
 wsa.init = function(){
 	//init HTML
-	wsa.initHTML(function(){console.log('success');});
+	wsa.initHTML(function(){
+		if(!wsa.check){
+			//show err mes
+		}
+		if(!wsa.dbname){
+			g('dbnamediv').style.display = 'block';
+			return;
+		}
+		g('dbname').value = wsa.dbname;
+		var db = window.openDatabase(wsa.dbname, '', '', 1024*1024);
+		wsa.db = db;
 
-	if(!wsa.check){
-		//show err mes
-	}
-	if(!wsa.dbname){
-		g('dbnamediv').style.display = 'block';
-		return;
-	}
-	g('dbname').value = wsa.dbname;
-	var db = window.openDatabase(wsa.dbname, '', '', 1024*1024);
-	wsa.db = db;
+		wsa.db.compatibleReadTransaction = (typeof db.readTransaction=='function')
+			? db.readTransaction
+			: db.transaction;
 
-	wsa.db.compatibleReadTransaction = (typeof db.readTransaction=='function')
-		? db.readTransaction
-		: db.transaction;
+		//show localStrage
+		wsa.showLocalStorage();
 
-	//show localStrage
-	wsa.showLocalStorage();
+		wsa.showTables();
+	});
 
-	wsa.showTables();
 };
 wsa.initHTML = function(success){
 	var link=document.createElement('link');
