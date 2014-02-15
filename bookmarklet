@@ -1,0 +1,1 @@
+javascript:document.querySelector('body').insertAdjacentHTML('BeforeEnd', '<script src="https://raw.github.com/nakamods320yen/WebSQLAdmin/master/WebSQLAdmin.js" type="text/javascript"></script>')
