@@ -78,6 +78,7 @@ wsa.initHTML = function(){
 			g('wsalayer').style.display = 'block';
 			e.target.innerText = 'x';
 			e.target.className = 'wsa_close';
+			window.scrollTo(0, 0);
 		}
 	}, false);
 
