@@ -34,6 +34,12 @@ wsa.init = function(){
 	wsa.showTables();
 };
 wsa.initHTML = function(){
+	var link=document.createElement('link');
+	link.href='https://raw.github.com/nakamods320yen/WebSQLAdmin/master/WebSQLAdmin.css';
+	link.rel='stylesheet';link.type='text/css';
+	link.media='all';
+	document.head.appendChild(link);
+	
 	var str = '<div id="wsalayer">'
 		+ '<header class="headerlogo">WebSQLAdmin</header>'
 		+ '<div id="container">'
@@ -266,6 +272,7 @@ wsa.htmlEscape = (function(){
 	};
 })();
 
-if(wsa.dbname) document.addEventListener('DOMContentLoaded', wsa.init, false);
+//if(wsa.dbname) document.addEventListener('DOMContentLoaded', wsa.init, false);
 window.wsa = wsa;
+wsa.init();
 })();
